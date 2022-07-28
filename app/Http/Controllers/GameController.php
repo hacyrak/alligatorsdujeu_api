@@ -21,7 +21,7 @@ class GameController extends Controller {
     }
 
     public function filter()
-    : JsonResponse {
+    : JsonResponse {  
         $tags = Game::select(DB::raw('SUBSTRING(SUBSTR(tags, 1, CHAR_LENGTH(tags) - 1),2) as tags_clean'))->distinct()->whereNotNull('tags')->pluck('tags_clean');
         //$tags = Game::query()->distinct()->whereNotNull('tags')->pluck('tags');
         $array["tags"] = array_values(array_unique(convert($tags)));
